@@ -24,13 +24,16 @@ public class NavegarCategoriasTeste {
 
     @Test
     public void navigateThroughCategory() throws InterruptedException {
+        //Maximiza tela
         driver.manage().window().maximize();
+
+        //Procura por elemento Xbox para seleciona-lo e trocar de categoria, verifica se esá habilitado para em seguida clicá-lo.
         WebElement xboxElement = driver.findElement(By.xpath("//strong[contains(text(), 'Xbox')]"));
         assertTrue(xboxElement.isEnabled(), "Não foi possível selecionar o elemento Xbox.");
         xboxElement.click();
         Thread.sleep(500);
 
-
+      //Procura por elemento console Xbox para seleciona-lo e trocar de categoria, verifica se esá habilitado para em seguida clicá-lo.
         WebElement xboxConsoleButton = driver.findElement(By.xpath("//*[@id=\"corpo\"]/div/div[2]/div[1]/div[1]/ul/li/ul/li[1]/a"));
         assertTrue(xboxConsoleButton.isEnabled(), "Não foi possível selecionar o elemento console Xbox.");
         xboxConsoleButton.click();

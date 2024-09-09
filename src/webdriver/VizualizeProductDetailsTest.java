@@ -23,8 +23,10 @@ public class VizualizeProductDetailsTest {
     }
     @Test
     public void viewProductDetails() throws InterruptedException {
+        //Maximiza a tela
         driver.manage().window().maximize();
 
+        //Busca por produto, e veerifica se a descrição do mesmo é mostrada.
         WebElement product = driver.findElement(By.xpath("/html/body/div[3]/div[4]/div/div[1]/div/div[2]/div[1]/div[2]/div/div/div[1]/div/article[2]/a[1]"));
         product.click();
         Thread.sleep(4000);

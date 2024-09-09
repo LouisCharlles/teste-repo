@@ -24,24 +24,23 @@ public class SearchForInexistentProductTest {
 
     @Test
     public void searchForInexistentProduct() throws InterruptedException {
+        //Maximiza tela
         driver.manage().window().maximize();
+
+        //Procura pela barra de pesquisa e verifica se está habilitada para clicá-la.
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement searchBar = driver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div[1]/div[2]/form/input"));
-
         assertTrue(searchBar.isEnabled(),"A barra de busca não está habilitada.");
-
         js.executeScript("arguments[0].click();", searchBar);
         Thread.sleep(3000);
 
-
+        //Cria uma String 'textoEsperado' e envia a mesma para a barra de pesquisa.
         String textoEsperado = "Ventilador Mondial";
         searchBar.sendKeys(textoEsperado);
 
-
+        //Verifica se o texto esperado é o mesmo texto que o valor que aa barra de pesuisa recebe.
         assertEquals(textoEsperado, searchBar.getAttribute("value"), "O texto inserido na barra de busca não corresponde.");
-
         Thread.sleep(3000);
-
         searchBar.submit();
     }
 

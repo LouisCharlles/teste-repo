@@ -27,13 +27,16 @@ public class ComparePricesByFilterTest {
 
     @Test
     public void comparePricesByFilter() throws InterruptedException {
+        //Maximiza janela.
         driver.manage().window().maximize();
+
+        //Procura elemento para clicar.
         WebElement xboxElement = driver.findElement(By.xpath("//strong[contains(text(), 'Xbox')]"));
         xboxElement.click();
         Thread.sleep(500);
 
 
-
+        //Procura e verifica se está habilitado o filtro para ordenar e em seguida clica-o e cria um driver javascript.
         WebElement filterCompare0 = driver.findElement(By.id("botaoOrdenar"));
         assertTrue(filterCompare0.isEnabled(), "Não foi possível selecionar o filtro.");
         Thread.sleep(2500);
@@ -41,6 +44,7 @@ public class ComparePricesByFilterTest {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Thread.sleep(2500);
 
+        //Acessa filtros de preço maior preço, menor e maior desconto e realiza verifica se cada um está habilitado e funcional.
         WebElement filterBiggerPrice = driver.findElement(By.cssSelector("#corpo > div > div.secao-principal.row-fluid.sem-coluna > div.conteudo.span9 > div.ordenar-listagem.topo.borda-alpha > div > div.span6.clearfix > div > div > div > ul > li:nth-child(5) > a"));
         assertTrue(filterBiggerPrice.isEnabled(), "Não foi possível selecionar o filtro.");
         filterBiggerPrice.click();
@@ -75,8 +79,11 @@ public class ComparePricesByFilterTest {
         js.executeScript("window.scrollBy(0,-1000);");
         Thread.sleep(2000);
 
+        //Cria uma variável do tipo WebDriverWait para auxiliar a achar um elemento pop-up de login.
         WebDriverWait wait = new WebDriverWait(this.driver, Duration.ofSeconds(3L));
 
+        //Verifica se o alerta de login é selecionável para clicar e fechá-lo.
+        //Finalmente, acessa os filtros de preço e verifica cada um se estão habilitados e funcionais até o filtro de mais de R$200 reais.
         WebElement alertLoginField1;
         try {
             alertLoginField1 = (WebElement)wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("close")));
