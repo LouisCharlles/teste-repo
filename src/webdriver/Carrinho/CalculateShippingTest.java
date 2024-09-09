@@ -26,9 +26,11 @@ public class CalculateShippingTest {
 
     @Test
     public void calculateShipping() throws InterruptedException {
+        //Maximiza a tela e cria um driver de espera;
         driver.manage().window().maximize();
         WebDriverWait wait = new WebDriverWait(this.driver, Duration.ofSeconds(3L));
 
+        //Verifica se o alerta de login é selecionável para clicar e fecha-lo e finalmente adicionar o item ao carrinho
         WebElement alertLoginField;
         try {
             alertLoginField = (WebElement)wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("close")));
@@ -39,6 +41,7 @@ public class CalculateShippingTest {
             addItemToCart();
         }
 
+        //Localiza o input de calculo de frete, cria uma String cep e envia uma chave com valor a ser validado como correto ou incorreto.
         WebElement inputCalculateShippingBar = driver.findElement(By.xpath("//*[@id=\"calcularFrete\"]"));
         assertTrue(inputCalculateShippingBar.isEnabled(),"O botão de calcular frete não está habilitado.");
         String cep = "65110-000";
@@ -49,11 +52,12 @@ public class CalculateShippingTest {
         inputCalculateShippingBar.submit();
         Thread.sleep(2000);
 
+        //Localiza o alerta de variação de preço para clicá-lo.
         WebElement alertaVariacaoDePreco = driver.findElement(By.xpath("/html/body/div[14]/div/div/a"));
         alertaVariacaoDePreco.click();
         Thread.sleep(2000);
 
-
+        //Localiza o preço do frete e verifica se o preço mudou de valor ao cálcular o frete.
         WebElement precoFrete = driver.findElement(By.xpath("//*[@id=\"corpo\"]/div/div[1]/div/div[2]/table/tbody/tr[2]/td[2]/div/ul/li[2]/label/span[1]"));
         assertTrue(precoFrete.isDisplayed(),"O valor do frete não foi encontrado.");
         Thread.sleep(2000);
@@ -70,9 +74,6 @@ public class CalculateShippingTest {
     purchaseButton.click();
     Thread.sleep(4000);
 
-//        WebElement continueShoppingButton = driver.findElement(By.xpath("//*[@id=\"corpo\"]/div/div[1]/div/form/div/div[1]/a"));
-//        continueShoppingButton.click();
-//        Thread.sleep(2000);
 }
 
 
